@@ -1,0 +1,13 @@
+{
+	"show_video": true,
+	"use_dropbox": true,
+	"dropbox_access_token": "zppuZ-sqkbsAAAAAAAAlb8SquapfW9G3cVDNQtflB7fQRGpyllFyZn6EnyPUlbTQ",
+	"dropbox_base_path": "Users/ycdeng/Dropbox",
+	"min_upload_seconds": 3.0,
+	"min_motion_frames": 10,
+	"camera_warmup_time": 2.5,
+	"delta_thresh": 5,
+	"resolution": [1600, 1200],
+	"fps": 30,
+	"min_area": 5000
+}
