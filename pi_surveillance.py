@@ -39,7 +39,9 @@ camera = PiCamera()
 camera.resolution = tuple(conf["resolution"])
 camera.framerate = conf["fps"]
 camera.rotation=180
+#camera.zoom=(0.2,0.2,0.4,0.4)
 rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
+
 
 # allow the camera to warmup, then initialize the average frame, last
 # uploaded timestamp, and frame motion counter
@@ -60,7 +62,7 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
     text = "Unoccupied"
 
     # resize the frame, convert it to grayscale, and blur it
-    frame = imutils.resize(frame, width=1000)
+    frame = imutils.resize(frame,width=conf["resize"])
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
@@ -124,7 +126,8 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
                 if conf["use_dropbox"]:
                     # write the image to temporary file
                     t = TempImage()
-                    cv2.imwrite(t.path, frame)
+                    cv2.imwrite(t.path, previousframe)
+#                    cv2.imwrite(t.path, frame)
 
                     # upload the image to Dropbox and cleanup the tempory image
                     print("[UPLOAD] {}".format(ts))
@@ -145,12 +148,14 @@ for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True
     # check to see if the frames should be displayed to screen
     if conf["show_video"]:
         # display the security feed
-        cv2.imshow("Security Feed", frame)
+        cv2.imshow("PCB board Counter by Wintec", frame)
         key = cv2.waitKey(1) & 0xFF
 
         # if the `q` key is pressed, break from the lop
         if key == ord("q"):
+            cv2.destroyAllWindows()
             break
 
     # clear the stream in preparation for the next frame
+    previousframe=frame
     rawCapture.truncate(0)
