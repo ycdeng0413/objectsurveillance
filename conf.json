@@ -1,8 +1,8 @@
 {
 	"show_video": true,
 	"use_dropbox": true,
-	"dropbox_access_token": "zppuZ-sqkbsAAAAAAAAlb8SquapfW9G3cVDNQtflB7fQRGpyllFyZn6EnyPUlbTQ",
-	"dropbox_base_path": "Users/ycdeng/Dropbox",
+	"dropbox_access_token": "your access token",
+	"dropbox_base_path": "your path",
 	"min_upload_seconds": 3.0,
 	"min_motion_frames": 5,
 	"camera_warmup_time": 2.5,
